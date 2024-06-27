@@ -1,15 +1,15 @@
 # @vitejs/release-scripts
 
-This repo is used to share release & publish scripts for the org. Scripts should be executed from the workspace root via `tsx scripts/release.ts`
+> forked from [vitejs/release-scripts](https://github.com/vitejs/release-scripts)
 
 ## release
 
 ```ts
-import { release } from "@vitejs/release-scripts";
+import { release } from "@hhplum/release-scripts";
 
 release({
   // Name of the repo for CI link
-  repo: "release-scripts",
+  repo: "hhplum/release-scripts",
   // List of options. Choice will be available in following callback as `pkg`
   packages: ["release-scripts"],
   toTag: (pkg, version) =>
@@ -30,7 +30,7 @@ release({
 ## publish
 
 ```ts
-import { publish } from "@vitejs/release-scripts";
+import { publish } from "@hhplum/release-scripts";
 
 publish({
   // Used when tag is not `pkg@version`
