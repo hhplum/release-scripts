@@ -123,7 +123,7 @@ export const release: typeof def = async ({
       colors.green(
         `
 Pushed, publishing should starts shortly on CI.
-https://github.com/vitejs/${repo}/actions/workflows/publish.yml`,
+https://github.com/${repo}/actions/workflows/publish.yml`,
       ),
     );
   }
