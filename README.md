@@ -1,4 +1,4 @@
-# @vitejs/release-scripts
+# @hhplum/release-scripts
 
 > forked from [vitejs/release-scripts](https://github.com/vitejs/release-scripts)
 
