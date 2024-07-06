@@ -2,7 +2,7 @@ import { execSync } from "child_process";
 import { release } from "../src/release.ts";
 
 release({
-  repo: "release-scripts",
+  repo: "@hhplum/release-scripts",
   packages: ["release-scripts"],
   toTag: (_, version) => `v${version}`,
   logChangelog: () =>

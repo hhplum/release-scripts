@@ -19,11 +19,11 @@
     "url": "git+https://github.com/hhplum/release-scripts.git"
   },
   "scripts": {
-    "build": "tnode scripts/build.ts",
+    "build": "tsx scripts/build.ts",
     "prettier": "pnpm prettier-ci --write",
     "prettier-ci": "prettier --cache --ignore-path=.gitignore --check '**/*.{ts,json,md,yml}'",
     "qa": "tsc && pnpm prettier-ci && pnpm build",
-    "release": "tnode scripts/release.ts"
+    "release": "tsx scripts/release.ts"
   },
   "dependencies": {
     "conventional-changelog": "^6.0.0",
@@ -35,12 +35,12 @@
     "semver": "^7.6.2"
   },
   "devDependencies": {
-    "@arnaud-barre/tnode": "^0.19.2",
     "@types/node": "^20.14.2",
     "@types/prompts": "^2.4.9",
     "@types/semver": "^7.5.8",
     "esbuild": "^0.21.5",
     "prettier": "^3.3.2",
+    "tsx": "^4.16.2",
     "typescript": "^5.4.5"
   },
   "packageManager": "pnpm@9.3.0"
