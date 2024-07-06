@@ -22,3 +22,24 @@ export declare function release(options: {
   getPkgDir?: (pkg: string) => string;
   file?: string;
 }): Promise<void>;
+
+export declare const changelogArgs: string[];
+
+export declare function generateChangelog(
+  pkgName: string,
+  args: string[],
+  mainName?: string,
+  getPkgDir?: (pkg: string) => string,
+): Promise<void>;
+
+export declare function getLatestTag(
+  pkgName: string,
+  mainName?: string,
+  getPkgDir?: (pkg: string) => string,
+): Promise<string>;
+
+export declare function logRecentCommits(
+  pkgName: string,
+  mainName?: string,
+  getPkgDir?: (pkg: string) => string,
+): Promise<void>;

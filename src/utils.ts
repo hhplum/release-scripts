@@ -6,6 +6,12 @@ import { execa } from "execa";
 import type { ReleaseType } from "semver";
 import semver from "semver";
 import mri from "mri";
+import type {
+  changelogArgs as CLA,
+  generateChangelog as GCL,
+  getLatestTag as GLT,
+  logRecentCommits as LRC,
+} from "./types.d.ts";
 
 export const args = mri(process.argv.slice(2));
 
@@ -64,6 +70,7 @@ interface VersionChoice {
   title: string;
   value: string;
 }
+
 export function getVersionChoices(currentVersion: string): VersionChoice[] {
   const currentBeta = currentVersion.includes("beta");
   const currentAlpha = currentVersion.includes("alpha");
@@ -168,7 +175,7 @@ export async function getActiveVersion(
   }
 }
 
-export const changelogArgs = [
+export const changelogArgs: typeof CLA = [
   "conventional-changelog",
   "-p",
   "angular",
@@ -179,32 +186,32 @@ export const changelogArgs = [
   ".",
 ];
 
-export async function generateChangelog(
+export const generateChangelog: typeof GCL = async (
   pkgName: string,
   args: string[] = changelogArgs,
   mainName?: string,
   getPkgDir: ((pkg: string) => string) | undefined = (pkg) => `packages/${pkg}`,
-): Promise<void> {
+): Promise<void> => {
   console.log(colors.cyan("\nGenerating changelog..."));
 
   if (pkgName !== mainName) args.push("--lerna-package", pkgName);
   await run("npx", args, { cwd: getPkgDir(pkgName) });
-}
+};
 
-export async function getLatestTag(
+export const getLatestTag: typeof GLT = async (
   pkgName: string,
   mainName?: string,
   getPkgDir: ((pkg: string) => string) | undefined = (pkg) => `packages/${pkg}`,
-): Promise<string> {
+): Promise<string> => {
   const { version } = getPackageInfo(pkgName, getPkgDir).pkg;
   return pkgName === mainName ? `v${version}` : `${pkgName}@${version}`;
-}
+};
 
-export async function logRecentCommits(
+export const logRecentCommits: typeof LRC = async (
   pkgName: string,
   mainName?: string,
   getPkgDir: ((pkg: string) => string) | undefined = (pkg) => `packages/${pkg}`,
-): Promise<void> {
+): Promise<void> => {
   const tag = await getLatestTag(pkgName, mainName, getPkgDir);
   if (!tag) return;
   const sha = await run("git", ["rev-list", "-n", "1", tag], {
@@ -230,4 +237,4 @@ export async function logRecentCommits(
     { stdio: "inherit" },
   );
   console.log();
-}
+};
