@@ -27,7 +27,10 @@ export declare const changelogArgs: string[];
 
 export declare function generateChangelog(
   pkgName: string,
-  args: string[],
+  /**
+   * @default changelogArgs
+   */
+  args?: string[],
   mainName?: string,
   getPkgDir?: (pkg: string) => string,
 ): Promise<void>;
