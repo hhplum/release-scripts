@@ -167,3 +167,67 @@ export async function getActiveVersion(
     throw e;
   }
 }
+
+export const changelogArgs = [
+  'conventional-changelog',
+  '-p',
+  'angular',
+  '-i',
+  'CHANGELOG.md',
+  '-s',
+  '--commit-path',
+  '.'
+]
+
+export async function generateChangelog(
+    pkgName: string,
+    args: string[] = changelogArgs,
+    mainName?: string,
+    getPkgDir: ((pkg: string) => string) | undefined = (pkg) => `packages/${pkg}`,
+): Promise<void> {
+  console.log(colors.cyan('\nGenerating changelog...'))
+
+  if (pkgName !== mainName) args.push('--lerna-package', pkgName)
+  await run('npx', args, { cwd: getPkgDir(pkgName) })
+}
+
+export async function getLatestTag(
+    pkgName: string,
+    mainName?: string,
+    getPkgDir: ((pkg: string) => string) | undefined = (pkg) => `packages/${pkg}`,
+): Promise<string> {
+  const { version } = getPackageInfo(pkgName, getPkgDir).pkg
+  return pkgName === mainName ? `v${version}` : `${pkgName}@${version}`
+}
+
+export async function logRecentCommits(
+    pkgName: string,
+    mainName?: string,
+    getPkgDir: ((pkg: string) => string) | undefined = (pkg) => `packages/${pkg}`,
+): Promise<void> {
+  const tag = await getLatestTag(pkgName, mainName, getPkgDir)
+  if (!tag) return
+  const sha = await run('git', ['rev-list', '-n', '1', tag], {
+    stdio: 'pipe',
+  }).then((res) => res.stdout.trim())
+  console.log(
+      colors.bold(
+          `\n${colors.blue(`i`)} Commits of ${colors.green(
+              pkgName,
+          )} since ${colors.green(tag)} ${colors.gray(`(${sha.slice(0, 5)})`)}`,
+      ),
+  )
+  await run(
+      'git',
+      [
+        '--no-pager',
+        'log',
+        `${sha}..HEAD`,
+        '--oneline',
+        '--',
+        getPkgDir(pkgName),
+      ],
+      { stdio: 'inherit' },
+  )
+  console.log()
+}

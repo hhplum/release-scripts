@@ -22,6 +22,7 @@ export const release: typeof def = async ({
   generateChangelog,
   toTag,
   getPkgDir,
+  file,
 }) => {
   let targetVersion: string | undefined;
 
@@ -123,7 +124,7 @@ export const release: typeof def = async ({
       colors.green(
         `
 Pushed, publishing should starts shortly on CI.
-https://github.com/${repo}/actions/workflows/publish.yml`,
+https://github.com/${repo}/actions/workflows/${file ?? 'publish.yml'}`,
       ),
     );
   }

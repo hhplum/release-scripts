@@ -1,6 +1,7 @@
 # @hhplum/release-scripts
 
 > forked from [vitejs/release-scripts](https://github.com/vitejs/release-scripts)
+> gitHead：990b85d661ae57f12a43f4e6020da7f23c743a9b
 
 ## release
 

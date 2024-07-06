@@ -1,6 +1,6 @@
 {
   "name": "@hhplum/release-scripts",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "release scripts",
   "license": "MIT",
   "main": "dist/index.js",
@@ -26,6 +26,7 @@
     "release": "tnode scripts/release.ts"
   },
   "dependencies": {
+    "conventional-changelog": "^6.0.0",
     "execa": "^8.0.1",
     "mri": "^1.2.0",
     "picocolors": "^1.0.1",
