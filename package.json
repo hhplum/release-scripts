@@ -26,7 +26,6 @@
     "release": "tsx scripts/release.ts"
   },
   "dependencies": {
-    "conventional-changelog-cli": "^5.0.0",
     "execa": "^8.0.1",
     "mri": "^1.2.0",
     "picocolors": "^1.0.1",
@@ -42,6 +41,14 @@
     "prettier": "^3.3.2",
     "tsx": "^4.16.2",
     "typescript": "^5.4.5"
+  },
+  "peerDependencies": {
+    "conventional-changelog-cli": "*"
+  },
+  "peerDependenciesMeta": {
+    "conventional-changelog-cli": {
+      "optional": true
+    }
   },
   "packageManager": "pnpm@9.3.0"
 }

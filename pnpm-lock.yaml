@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       conventional-changelog-cli:
-        specifier: ^5.0.0
+        specifier: '*'
         version: 5.0.0(conventional-commits-filter@5.0.0)
       execa:
         specifier: ^8.0.1
